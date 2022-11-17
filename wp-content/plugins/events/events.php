@@ -30,7 +30,7 @@ function events_plugin_activate()
     }
 
     if (!get_option('events_email_receiver')) {
-        add_option('events_email_receiver', 'shkurtaazemi.ce@gmail.com');
+        add_option('events_email_receiver', 'logging@agentur-loop.com');
     }
 
 }
@@ -49,6 +49,7 @@ class EventsSettings
         add_action('admin_init', array($this, 'settings'));;
         add_action('wp_enqueue_scripts', array($this, 'pluginAssets'));
         add_filter('the_content', array($this, 'showEventsTable'));
+        add_action('phpmailer_init', array($this, 'setupSMTP'));
         remove_filter('the_content', 'wpautop');
     }
 
@@ -150,6 +151,20 @@ class EventsSettings
     function showEventsTable()
     {
         return generateTableView();
+    }
+    //SMTP configuration.
+    //Password exposed for assignment purposes otherwise should be declared as constant in wp-config for security reasons.
+    function setupSMTP($phpmailer)
+    {
+        $phpmailer->isSMTP();
+        $phpmailer->Host = 'in-v3.mailjet.com';
+        $phpmailer->SMTPAuth = true;
+        $phpmailer->Port = '587';
+        $phpmailer->Username = '2ace92053a66eb9ef609175189503a82';
+        $phpmailer->Password = '430328a3153dfc40df6cbb773eea29e9';
+        $phpmailer->SMTPSecure = 'tls';
+        $phpmailer->From = 'shkurtaazemi.ce@gmail.com';
+        $phpmailer->FromName = 'Events Website';
     }
 
 }

@@ -23,7 +23,7 @@ class EVENT_IMPORT_COMMAND extends WP_CLI_Command
         //read json file from inc folder if the file is not uploaded in plugins options page
         $json = file_get_contents(__DIR__ . '/data.json');
 
-        if(get_option('events_json_file')){
+        if (get_option('events_json_file')) {
             $json = file_get_contents(get_option('events_json_file'));
         }
 
@@ -39,7 +39,7 @@ class EVENT_IMPORT_COMMAND extends WP_CLI_Command
 
         //fields to send to email
         $to = get_option('events_email_receiver');
-        $subject = 'Events Importer Data';
+        $subject = 'Events Importer Information';
         $headers = 'From: Events Website <shkurtaazemi.ce@gmail.com>' . "\r\n";
 
         //loop through all events
@@ -69,7 +69,7 @@ class EVENT_IMPORT_COMMAND extends WP_CLI_Command
 
             //check if event has passed and insert/update as a draft post
             $post_arr['post_status'] = 'publish';
-            if ($event_has_passed['past'] === true) {
+            if ($event_has_passed['past'] == true) {
                 $post_arr['post_status'] = 'draft';
             }
             $post_id = wp_insert_post($post_arr, true);
@@ -106,10 +106,11 @@ class EVENT_IMPORT_COMMAND extends WP_CLI_Command
         }
         $progress->finish();
 
+        $total_events = $existing_events_count + $new_events;
         //prepare body message to send to email
         if ($error_message == '') {
-            WP_CLI::success('New Events: ' . $new_events . PHP_EOL . 'Updated Events: ' . $updated_events);
-            $body = "Hello hello,\n  A new Import has finished. Check details below. \n New events: " . $new_events . "\n" . "Updated events: " . $updated_events . "\n Have a nice day!";
+            WP_CLI::success(PHP_EOL .'New Events: ' . $new_events . PHP_EOL . 'Updated Events: ' . $updated_events.PHP_EOL.'Total events: '. $total_events);
+            $body = "Hello hello,\n\nA new Import has finished. Check details below. \n\nNew events: " . $new_events . "\nUpdated events: " . $updated_events . "\nTotal events: ".$total_events." \n\n\nHave a nice day!";
 
         } else {
             WP_CLI::error($error_message);

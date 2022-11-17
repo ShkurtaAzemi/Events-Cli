@@ -2,6 +2,7 @@
 //fetches all upcoming events from rest api endpoint and shows them in a datatable
 function generateTableView()
 {
+
     $response = wp_remote_get(get_site_url() . '/wp-json/events/v1/getAllUpcoming');
     if ((!is_wp_error($response)) && (200 === wp_remote_retrieve_response_code($response))) :
         $events = json_decode($response['body']);
@@ -39,6 +40,7 @@ function generateTableView()
                                     <th>Latitude</th>
                                     <th>Longitude</th>
                                     <th>Tags</th>
+                                    <th>Date and time</th>
                                     <th>Remaining Time</th>
                                 </tr>
                                 </thead>
@@ -52,7 +54,7 @@ function generateTableView()
                                     $address = $event->address;
                                     $latitude = $event->latitude;
                                     $longitude = $event->longitude;
-                                    $date_difference = DatesDifferenceCalculator::calculateDifference($event->timestamp);
+                                    $date_difference =(new class { use DatesDifferenceCalculator; })::calculateDifference($event->timestamp);
                                     $remaining_time = $date_difference['remaining_time'];
                                     $tags = implode(', ', $event->tags);
                                     ?>
@@ -65,6 +67,7 @@ function generateTableView()
                                         <td><?php echo $latitude ?></td>
                                         <td><?php echo $longitude ?></td>
                                         <td><?php echo $tags ?></td>
+                                        <td><?php echo $event->timestamp?></td>
                                         <td>In <?php echo $remaining_time ?></td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -79,6 +82,7 @@ function generateTableView()
                                     <th>Latitude</th>
                                     <th>Longitude</th>
                                     <th>Tags</th>
+                                    <th>Date and time</th>
                                     <th>Remaining Time</th>
                                 </tr>
                                 </tfoot>
