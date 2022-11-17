@@ -37,7 +37,7 @@ class ExportEvents
         fwrite($f, $data);
         fclose($f);
 
-        header('Content-type: application/pdf', true, 200);
+        header('Content-type: application/json', true, 200);
         header('Content-Disposition: attachment; filename="' . $file_name . '"');
         header('Cache-Control: public');
         readfile($save_path);

@@ -5,6 +5,7 @@ Description: A plugin that fetches data from a json file and displays them as Ev
 Author: Shkurte Azemi
 Version: 1.0.0
 */
+
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
 
 require_once plugin_dir_path(__FILE__) . 'inc/Events.php';
@@ -87,7 +88,7 @@ class EventsSettings
         ?>
         <input type="file" name="events_json_file" value="<?php echo get_option('events_json_file'); ?>"
                style="width:600px">
-        <?php echo get_option('events_json_file') ?>
+        <p><?php echo get_option('events_json_file') ?></p>
         <?php
     }
 

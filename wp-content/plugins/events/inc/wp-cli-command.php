@@ -34,7 +34,6 @@ class EVENT_IMPORT_COMMAND extends WP_CLI_Command
         $new_events = 0;
         $updated_events = 0;
         $error_message = '';
-//        $events_dictionary = array();
 
         $progress = \WP_CLI\Utils\make_progress_bar('Importing events', $count);
 
@@ -53,10 +52,6 @@ class EVENT_IMPORT_COMMAND extends WP_CLI_Command
             $latitude = $event['latitude'] ?? '';
             $longitude = $event['longitude'] ?? '';
             $time = $event['timestamp'] ?? '';
-
-//            if (!in_array($events[$i]['id'], $events_dictionary)) {
-//                $events_dictionary[] = $events[$i]['id'];
-//            }
 
             $event_has_passed = null;
             if ($time != '') {
@@ -122,8 +117,6 @@ class EVENT_IMPORT_COMMAND extends WP_CLI_Command
         }
 
         wp_mail($to, $subject, $body, $headers);
-
-
     }
 
 }

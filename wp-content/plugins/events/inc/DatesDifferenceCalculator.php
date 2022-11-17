@@ -30,13 +30,9 @@ trait DatesDifferenceCalculator
             $difference['remaining_time'] .= $interval->i . " minutes. ";
         }
 
-        $past = false;
-        $invert = $interval->invert;
         //invert=1 means the event has passed, invert=0 means that event is in the future
-        if ($invert == 1) {
-            $past = true;
-        }
-        $difference['past'] = $past;
+
+        $difference['past'] = $interval->invert == 1;
         return $difference;
 
 
