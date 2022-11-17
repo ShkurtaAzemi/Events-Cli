@@ -8,11 +8,13 @@ Version: 1.0.0
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
 
 require_once plugin_dir_path(__FILE__) . 'inc/Events.php';
+require_once plugin_dir_path(__FILE__) . 'inc/GetAllUpcomingEvents.php';
+require_once plugin_dir_path(__FILE__) . 'inc/ExportEvents.php';
+
 
 if ( defined( 'WP_CLI' ) && WP_CLI ) {
 
     require_once plugin_dir_path(__FILE__) . 'inc/wp-cli-command.php';
-
 
 }
 

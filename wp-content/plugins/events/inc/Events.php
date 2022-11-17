@@ -27,7 +27,7 @@ class Events
                     'new_item' => __('New ' . $singular_name),
                     'edit_item' => __('Edit ' . $singular_name),
                     'view_item' => __('View ' . $singular_name),
-                    'all_items' => __('All ' .  $singular_name),
+                    'all_items' => __('All ' .  $name),
                     'search_items' => __('Search ' . $name),
                     'parent_item_colon' => __('Parent :' . $name),
                     'not_found' => __('No ' . strtolower($name) . ' found.'),
@@ -39,7 +39,7 @@ class Events
                 'show_in_rest' => true,
                 'rewrite' => array('slug' => strtolower($name)),
                 'menu_icon' => 'dashicons-admin-site-alt',
-                'supports' => array( 'title')
+                'supports' => array( 'title', 'editor')
             )
         );
 
@@ -82,7 +82,17 @@ class Events
         $events = json_decode($json,true);
 
         echo "<pre>";
-        print_r($events[0]);
+//        print_r($events[0]);
+        $date_now = date('Y-m-d h:i:s', time());
+
+
+        $date1 = new DateTime($date_now);
+        $date2 = new DateTime("2022-11-16 12:13:01");
+        $interval = $date1->diff($date2);
+        $diff= "difference " . $interval->y . " years, " . $interval->m." months, ".$interval->d." days ";
+
+        $invert    = $interval->invert;
+        print_r($invert);
 
 //        foreach ($events as $event) {
 //            print_r($event);
