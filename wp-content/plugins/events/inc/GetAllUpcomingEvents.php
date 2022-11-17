@@ -1,5 +1,6 @@
 <?php
 
+//creates a Rest API endpoint to show all upcoming events
 class GetAllUpcomingEvents
 {
     function __construct()
@@ -25,7 +26,6 @@ class GetAllUpcomingEvents
             'post_status' => 'publish',
             'meta_key' => 'event_time',
             'orderby' => array('meta_value' => 'ASC'),
-//            'order' => 'ASC',
         );
         $events = new WP_Query($args);
 
@@ -51,6 +51,10 @@ class GetAllUpcomingEvents
                 $structured_events[] = $event;
             endwhile;
         endif;
+
+        if (empty($events)) {
+            return new WP_Error('empty_events', 'There are no events to display', array('status' => 404));
+        }
 
         $response = new WP_REST_Response($structured_events);
 

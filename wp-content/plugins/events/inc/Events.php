@@ -1,4 +1,6 @@
 <?php
+
+//create custom post type for events and tags taxonomy
 class Events
 {
 
@@ -6,7 +8,6 @@ class Events
     {
         add_action('init', array($this, 'create_post_type'));
         add_action('init', array($this, 'create_events_non_hierarchical_taxonomy'));
-        add_filter('the_content', array($this, 'showReviewsHtml'));
     }
 
     function create_post_type()
@@ -34,11 +35,10 @@ class Events
                     'not_found_in_trash' => __('No ' . strtolower($name) . ' found in Trash.')
                 ),
                 'public' => true,
-//                'has_archive' => strtolower($taxonomy_name),
                 'hierarchical' => false,
                 'show_in_rest' => true,
                 'rewrite' => array('slug' => strtolower($name)),
-                'menu_icon' => 'dashicons-admin-site-alt',
+                'menu_icon' => 'dashicons-calendar',
                 'supports' => array( 'title', 'editor')
             )
         );
@@ -73,35 +73,6 @@ class Events
             'rewrite' => array('slug' => 'tags'),
         ));
     }
-
-    function showReviewsHtml()
-    {
-        $json = file_get_contents(__DIR__.'/data.json');
-
-        // Decode the JSON file
-        $events = json_decode($json,true);
-
-        echo "<pre>";
-//        print_r($events[0]);
-        $date_now = date('Y-m-d h:i:s', time());
-
-
-        $date1 = new DateTime($date_now);
-        $date2 = new DateTime("2022-11-16 12:13:01");
-        $interval = $date1->diff($date2);
-        $diff= "difference " . $interval->y . " years, " . $interval->m." months, ".$interval->d." days ";
-
-        $invert    = $interval->invert;
-        print_r($invert);
-
-//        foreach ($events as $event) {
-//            print_r($event);
-//        }
-
-        echo "here";
-    }
-
-
 }
 
 $events = new Events();

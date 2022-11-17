@@ -1,0 +1,85 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+    font-style: normal;
+}
+
+.events-table{
+    padding: 100px 0px;
+}
+
+.events-table .show-data-button a, .events-table .export-data-button a{
+    margin-right: 13px;
+    margin-bottom: 10px;
+    padding: 10px 11px;
+    background-color: #f5f5f5;
+    line-height: 20px;
+    text-decoration: none;
+    color: #666;
+    font-size: 16px;
+    font-family: Georgia;
+    display: inline-block;
+    background-image: -webkit-gradient(linear,left top,left bottom,from(#f5f5f5),to(#f1f1f1));
+    background-image: -webkit-linear-gradient(top,#f5f5f5,#f1f1f1);
+    background-image: -moz-linear-gradient(top,#f5f5f5,#f1f1f1);
+    background-image: -o-linear-gradient(top,#f5f5f5,#f1f1f1);
+    background-image: -ms-linear-gradient(top,#f5f5f5,#f1f1f1);
+    background-image: linear-gradient(top,#f5f5f5,#f1f1f1);
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.title-row{
+    justify-content: center;
+}
+
+.buttons-row{
+    justify-content: flex-end;
+}
+
+.page-item.active .page-link{
+    background-color: lightgrey;
+    border-color: dimgray;
+}
+
+.page-item.active .page-link{
+    color:white;
+}
+.page-item:hover, .page-item .page-link{
+    color:#3B3B3B;
+}
+
+[data-title] {
+    font-size: 18px;
+    position: relative;
+    cursor: help;
+}
+
+[data-title]:hover::before {
+    content: attr(data-title);
+    position: absolute;
+    bottom: -69px;
+    padding: 10px;
+    background: #000;
+    color: #fff;
+    font-size: 14px;
+    width: 300px;
+    z-index: 20;
+
+}
+
+
+@media only screen and (max-width: 426px) {
+    .buttons-row{
+        justify-content: center;
+    }
+    [data-title]:hover::before{
+        bottom:0px;
+        right: -4px;
+
+    }
+}
+
