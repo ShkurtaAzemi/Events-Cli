@@ -25,10 +25,6 @@ if (defined('WP_CLI') && WP_CLI) {
 function events_plugin_activate()
 {
 
-    if (!get_option('events_json_file')) {
-        add_option('events_json_file', __DIR__ . '/inc/data.json');
-    }
-
     if (!get_option('events_email_receiver')) {
         add_option('events_email_receiver', 'logging@agentur-loop.com');
     }

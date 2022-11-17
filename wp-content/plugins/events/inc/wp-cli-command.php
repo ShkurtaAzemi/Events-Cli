@@ -58,9 +58,11 @@ class EVENT_IMPORT_COMMAND extends WP_CLI_Command
                 $event_has_passed = $this->calculateDifference($time);
             }
 
+            //check if post exist to know whether to update post or add a new one
+            $newPostKey = (get_post_status($event['id'])) ? 'ID' : 'import_id';
             //build array of data to be inserted
             $post_arr = array(
-                'ID' => $event['id'],
+                $newPostKey => $event['id'],
                 'post_title' => $event['title'],
                 'post_content' => $event['about'],
                 'post_type' => 'events',
