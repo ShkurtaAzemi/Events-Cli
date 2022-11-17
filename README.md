@@ -14,8 +14,9 @@ define( 'ALLOW_UNFILTERED_UPLOADS', true );
 4. Activate ACF plugin in Plugins page in dashboard.
 5. Activate Events Plugin.
 6. Fill in the Settings Option fields in the Settings->Events Settings.
-7. Activate Events Theme in Appearance->Events Theme
-8. Make any page as the front-page of the theme in Settings->Reading -> Your homepage displays -> Static Page -> Homepage: Any page available or a new one (e.g Sample Page) and hit Save Changes.
+7. Activate Events Theme in Appearance->Events Theme.
+8. Go to Custom Fields in dashboard menu and then under Sync Available hover over Local JSON and click Import to import needed fields.
+9. Make any page as the front-page of the theme in Settings->Reading -> Your homepage displays -> Static Page -> Homepage: Any page available or a new one (e.g Sample Page) and hit Save Changes.
 
 
 ## Usage
